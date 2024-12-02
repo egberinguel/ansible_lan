@@ -1,0 +1,10 @@
+- name: Distribute SSH key to multiple servers
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Add SSH public key to authorized_keys
+      authorized_key:
+        user: "<username>"  # Replace with the target username
+        state: present
+        key: "{{ lookup('file', '/path/to/id_rsa.pub') }}"
